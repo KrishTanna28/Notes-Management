@@ -28,11 +28,3 @@ Open `http://localhost:5173`.
 
 ---
 
-## Evaluation Criteria
-
-We evaluate:
-- Problem solving
-- Code quality
-- Understanding of basics
-- Effort and learning ability
-
