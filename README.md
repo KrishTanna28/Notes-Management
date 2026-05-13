@@ -76,7 +76,4 @@ node debugging-assignment.js
 
 See [backend/notes-api/README.md](backend/notes-api/README.md) for full API details.
 
-## License
-
-MIT
 
