@@ -1,26 +1,39 @@
 # Notes API
 
-Node.js + Express + MongoDB API for the Notes Management System.
+This is a small Node.js + Express + MongoDB API that powers the Notes
+Management System. It supports search, tags, and pinned notes, and returns
+clean JSON responses for the UI.
 
-## Run
+## Requirements
+
+- Node.js 18+ and npm
+- A MongoDB instance (local or Atlas)
+
+## Run locally
 
 ```bash
 npm install
 npm start
 ```
 
-On this Windows PowerShell setup, use `npm.cmd install` and `npm.cmd start` if
-script execution policy blocks `npm`.
+Optional for auto-reload:
 
-Create a `.env` file or use the default local MongoDB URI:
+```bash
+npm run dev
+```
+
+On Windows PowerShell, use `npm.cmd install` and `npm.cmd start` if `npm.ps1`
+is blocked by execution policy.
+
+Create a `.env` file (or rely on defaults):
 
 ```bash
 PORT=4000
 MONGODB_URI=mongodb://127.0.0.1:27017/notes-management
 ```
 
-The API runs at `http://localhost:4000`. In production it can serve the React
-build from `../../frontend/notes-ui/dist`.
+The API runs at `http://localhost:4000`. If you build the frontend, this server
+can also serve the static UI from `../../frontend/notes-ui/dist`.
 
 ## Endpoints
 
@@ -31,7 +44,15 @@ build from `../../frontend/notes-ui/dist`.
 - `PUT /api/notes/:id`
 - `DELETE /api/notes/:id`
 
-## Note Shape
+Query options for listing notes:
+
+- `q` searches `title` and `content` (MongoDB text index)
+- `tag` filters by a single tag
+- `pinned=true` returns only pinned notes
+
+## Data shape
+
+Single note response:
 
 ```json
 {
@@ -45,5 +66,10 @@ build from `../../frontend/notes-ui/dist`.
 }
 ```
 
-Notes are stored in MongoDB through Mongoose. The model also creates a text
-index on `title` and `content` for search.
+List responses return `{ notes, total }`. Each note in the list also includes a
+`preview` field (first 150 characters of content) for quick display in the UI.
+
+## Error responses
+
+- Validation errors return HTTP 400 with `{ message, errors }`.
+- Unknown IDs return HTTP 404 with `{ message: "Note not found." }`.

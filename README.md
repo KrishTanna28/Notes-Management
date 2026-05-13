@@ -1,97 +1,82 @@
-# Trainee Developer Assignment
+# Notes Management System
 
-## Overview
+This project is a full-stack Notes Management System, designed for easy note-taking, organization, and search. It consists of a RESTful backend API and a modern, responsive frontend UI.
 
-This assignment has 3 parts:
+## Features
 
-1. Core Task (Mandatory)
-2. Notes Backend (Optional)
-3. Notes Frontend (Optional)
+- Create, edit, and delete notes
+- Tag notes and filter by tag
+- Pin important notes
+- Full-text search on title and content
+- Responsive, user-friendly interface
 
-You must complete the Core Task.
-You can choose Backend, Frontend, or both.
+## Tech Stack
 
----
+- **Backend:** Node.js, Express, MongoDB, Mongoose
+- **Frontend:** React, Vite
 
-## 1. Core Task (Mandatory)
+## Project Structure
 
-Fix bugs in the provided code and make sure the project runs correctly.
+- `backend/notes-api` — REST API for notes (Node.js + Express + MongoDB)
+- `frontend/notes-ui` — React web app for managing notes
+- `core/buggy-code` — (For maintainers) Example Express app for debugging practice
 
----
+## Getting Started
 
-## 2. Backend Task (Optional)
+### 1. Start the Backend API
 
-Build a Notes API with following endpoints:
-
-- POST /notes
-- GET /notes
-- GET /notes/:id
-- PUT /notes/:id
-- DELETE /notes/:id
-
----
-
-## 3. Frontend Task (Optional)
-
-Build a Notes UI:
-
-- Show list of notes
-- Create note
-- Edit note
-- Delete note
-
----
-
-## Rules
-
-- You can use Google / ChatGPT
-- Do not copy full project from internet
-- Keep code simple and readable
-
----
-
-## Submission
-
-- Push code to GitHub
-- Share repository link
-
----
-
-## Notes Management System
-
-The optional full-stack notes app is implemented in:
-
-- `backend/notes-api` - Node.js + Express API with MongoDB/Mongoose
-- `frontend/notes-ui` - React + Vite responsive notes UI
-
-Run the backend from `backend/notes-api`:
-
-```bash
+```
+cd backend/notes-api
 npm install
 npm start
 ```
 
-Use `MONGODB_URI` in `.env` for MongoDB Atlas or a local MongoDB instance.
+Create a `.env` file if you want to override defaults:
 
-Run the frontend from `frontend/notes-ui`:
+```
+PORT=4000
+MONGODB_URI=mongodb://127.0.0.1:27017/notes-management
+```
 
-```bash
+The API will be available at `http://localhost:4000`.
+
+### 2. Start the Frontend UI
+
+```
+cd frontend/notes-ui
 npm install
 npm run dev
 ```
 
-On Windows PowerShell, use `npm.cmd install` and `npm.cmd start` if `npm.ps1` is
-blocked by execution policy.
+By default, the UI connects to the API at `http://localhost:4000`. If your API runs elsewhere, add a `.env` file with:
 
-Open `http://localhost:5173`.
+```
+VITE_API_URL=http://localhost:4000
+```
 
----
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Evaluation Criteria
+### 3. (Optional) Debugging Example
 
-We evaluate:
-- Problem solving
-- Code quality
-- Understanding of basics
-- Effort and learning ability
+For maintainers or learning purposes, the `core/buggy-code` folder contains a small Express app with intentional bugs. You can use it to practice debugging:
+
+```
+cd core/buggy-code
+npm install
+node debugging-assignment.js
+```
+
+## API Overview
+
+- `GET /api/notes` — List notes (supports `q`, `tag`, `pinned` query params)
+- `GET /api/notes/:id` — Get a single note
+- `POST /api/notes` — Create a note
+- `PUT /api/notes/:id` — Update a note
+- `DELETE /api/notes/:id` — Delete a note
+
+See [backend/notes-api/README.md](backend/notes-api/README.md) for full API details.
+
+## License
+
+MIT
 
